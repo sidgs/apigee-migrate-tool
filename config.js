@@ -1,19 +1,20 @@
+
 module.exports = {
 
 	from: {
-		version: '19.04',
-		url: 'https://api.enterprise.apigee.com',
-		userid: 'admin@google.com',
-		passwd: 'SuperSecret123',
-		org: 'org1',
-		env: 'test'
+		version: process.env.FROM_VERSION || '19.04',
+		url: process.env.FROM_URL ||  'https://api.enterprise.apigee.com',
+		userid: process.env.FROM_USER || 'admin@google.com',
+		passwd: process.env.FROM_PWD ||'SuperSecret123',
+		org: process.env.FROM_ORG ||'org1',
+		env: process.env.FROM_ENV ||'test'
 	},
 	to: {
-		version: '19.04',
-		url: 'https://api.enterprise.apigee.com',
-		userid: 'admin@google.com',
-		passwd: 'SuperSecret123!9',
-		org: 'org2',
-		env: 'test'
+		version: process.env.TO_VERSION || '19.04',
+		url: process.env.TO_URL ||  'https://api.enterprise.apigee.com',
+		userid: process.env.TO_USER || 'admin@google.com',
+		passwd: process.env.TO_PWD ||'SuperSecret123',
+		org: process.env.TO_ORG ||'org1',
+		env: process.env.TO_ENV ||'test'
 	}
 } ;

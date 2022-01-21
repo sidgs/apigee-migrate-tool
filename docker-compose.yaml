@@ -1,0 +1,14 @@
+services:
+  import:
+    build:
+      context: .
+    image: ${REPO:-localhost}/apigee-migrate-tool
+    environment:
+      - name=value
+    env_file:
+      - .env
+    command: "sh -x ./all_export_tasks.sh"
+    volumes:
+      - ./data:/app/data 
+    
+

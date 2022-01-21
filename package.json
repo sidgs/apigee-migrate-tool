@@ -17,5 +17,8 @@
     "readline": "0.0.7",
     "request": "^2.88.0",
     "time-grunt": "^1.0.0"
+  },
+  "dependencies": {
+    "dotenv": "^14.2.0"
   }
 }
