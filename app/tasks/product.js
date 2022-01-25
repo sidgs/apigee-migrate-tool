@@ -16,17 +16,29 @@ module.exports = function(grunt) {
 
 		grunt.verbose.writeln("getting products..." + url);
 		url = url + "/v1/organizations/" + org + "/apiproducts";
+		var gatewayType = apigee.from.gatewayType || 0 ; 
+
 
 		request(url, function (error, response, body) {
 			if (!error && response.statusCode == 200) {
 				grunt.log.write("PRODUCTS: " + body);
 			    products =  JSON.parse(body);
+
+				if ( gatewayType === '1') {
+					const prodList = []; 
+					for ( i in products.apiProduct) {
+						prodList[i] = products.apiProduct[i].name
+					}
+					products = prodList
+				}
+
 			    
 			    if( products.length == 0 ) {
 			    	grunt.verbose.writeln("No Products");
 			    	done();
 			    }
 			    for (var i = 0; i < products.length; i++) {
+
 			    	var product_url = url + "/" + products[i];
 			    	grunt.file.mkdir(filepath);
 
@@ -48,7 +60,7 @@ module.exports = function(grunt) {
 							}
 							else
 							{
-								grunt.verbose.writeln('Error Exporting Product ' + product_detail.name);
+								grunt.verbose.writeln('Error Exporting Product ' + products[i]);
 								grunt.log.error(error);
 							}
 
@@ -58,7 +70,10 @@ module.exports = function(grunt) {
 								grunt.log.ok('Processed ' + done_count + ' products');
 	                            grunt.verbose.writeln("================== export products DONE()" );
 								done();
+							} else {
+								grunt.verbose.writeln(`done_count = ${done_count} && products = ${products.length} `)
 							}
+
 						}).auth(userid, passwd, true);
 					}
 			    	// End product details

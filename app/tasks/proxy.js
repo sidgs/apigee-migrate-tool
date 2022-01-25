@@ -9,6 +9,7 @@ module.exports = function(grunt) {
 		var org = apigee.from.org;
 		var userid = apigee.from.userid;
 		var passwd = apigee.from.passwd;
+		var hybrid = apigee.from.gatewayType || "0"; 
 		var fs = require('fs');
 		var filepath = grunt.config.get("exportProxies.dest.data");
 		var done_count =0;
@@ -20,7 +21,15 @@ module.exports = function(grunt) {
 
 		request(url, function (error, response, body) {
 			if (!error && response.statusCode == 200) {
-			    proxies =  JSON.parse(body);
+				if (hybrid === '1') {
+					var plist = JSON.parse(body).proxies; 
+					proxies= [];
+					 for ( i in plist ) {
+						proxies[i]=	 plist[i].name;
+					 }
+				} else {
+					proxies =  JSON.parse(body);
+				}
 			   
 			    for (var i = 0; i < proxies.length; i++) {
 			    	var proxy_url = url + "/" + proxies[i];

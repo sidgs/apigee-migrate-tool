@@ -6,6 +6,14 @@ var kvms;
 module.exports = function(grunt) {
 	'use strict';
 	grunt.registerTask('exportEnvKVM', 'Export all env-kvm from org ' + apigee.from.org + " environment " + apigee.from.env + " [" + apigee.from.version + "]", function() {
+	
+		var gatewayType = apigee.from.gatewayType || 0 ; 
+
+		if ( gatewayType === '1') {
+			grunt.log.ok("exportEnvKVM - is not supported for Hybrid and X ")
+			return ; 
+		}
+
 		var url = apigee.from.url;
 		var org = apigee.from.org;
 		var env = apigee.from.env;
@@ -68,6 +76,14 @@ module.exports = function(grunt) {
 	});
 
 	grunt.registerMultiTask('importEnvKVM', 'Import all env-kvm to org ' + apigee.to.org + " environment " + apigee.to.env + " [" + apigee.to.version + "]", function() {
+	
+		var gatewayType = apigee.to.gatewayType || 0 ; 
+
+		if ( gatewayType  === '1') {
+			grunt.log.ok("importEnvKVM - is not supported for Hybrid and X ")
+			return ; 
+		}
+
 		var url = apigee.to.url;
 		var org = apigee.to.org;
 		var env = apigee.to.env;
@@ -146,6 +162,14 @@ module.exports = function(grunt) {
 
 
 	grunt.registerMultiTask('deleteEnvKVM', 'Delete all env-kvm from org ' + apigee.to.org + " environment " + apigee.to.env + " [" + apigee.to.version + "]", function() {
+	
+		var gatewayType = apigee.to.gatewayType || 0 ; 
+
+		if ( gatewayType  === '1') {
+			grunt.log.ok("deleteEnvKVM - is not supported for Hybrid and X ")
+			return ; 
+		}
+		
 		var url = apigee.to.url;
 		var org = apigee.to.org;
 		var env = apigee.to.env;

@@ -51,14 +51,16 @@ module.exports = function(grunt) {
 									grunt.file.write(file_name, JSON.stringify(app));
 									grunt.verbose.writeln('App ' + app.name + ' written!');
 								};
-							}
-							total_apps += apps.length;
+							
+								total_apps += apps.length;
 
-							if (apps.length > 0) {
-								grunt.log.ok('Retrieved ' + apps.length + ' apps for ' + dev_detail.email);
-							} else {
-								grunt.verbose.writeln('Retrieved ' + apps.length + ' apps for ' + dev_detail.email);
-							}
+								if (apps.length > 0) {
+									grunt.log.ok('Retrieved ' + apps.length + ' apps for ' + dev_detail.email);
+								} else {
+									grunt.verbose.writeln('Retrieved ' + apps.length + ' apps for ' + dev_detail.email);
+								}
+
+						    }
 						}
 						else {
 							grunt.verbose.writeln('Error Exporting ' + app.name);
@@ -91,7 +93,15 @@ module.exports = function(grunt) {
 			grunt.verbose.writeln("getting developers..." + url);
 			request(url, function (error, response, body) {
 				if (!error && response.statusCode == 200) {
+
 					var devs = JSON.parse(body);
+					if ( devs.developer !== undefined && apigee.from.gatewayType === '1') {
+						const devList = [];
+						for ( i in devs.developer ) {
+							devList[i] = devs.developer[i].email
+						}
+						devs = devList; 
+					}
 					var last = null;
 
 					// detect none and we're done

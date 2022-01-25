@@ -6,6 +6,13 @@ var kvms;
 module.exports = function(grunt) {
 	'use strict';
 	grunt.registerTask('exportProxyKVM', 'Export all proxy-kvm from org ' + apigee.from.org + " [" + apigee.from.version + "]", function() {
+	
+		var gatewayType = apigee.from.gatewayType || 0 ; 
+
+		if ( gatewayType === '1') {
+			grunt.log.ok("exportProxyKVM - is not supported for Hybrid and X ")
+			return ; 
+		}
 		var url = apigee.from.url;
 		var org = apigee.from.org;
 		var userid = apigee.from.userid;
@@ -85,6 +92,14 @@ module.exports = function(grunt) {
 
 
 	grunt.registerMultiTask('importProxyKVM', 'Import all proxy-kvm to org ' + apigee.to.org + " [" + apigee.to.version + "]", function() {
+	
+		var gatewayType = apigee.to.gatewayType || 0 ; 
+
+		if ( gatewayType === '1') {
+			grunt.log.ok("importProxyKVM - is not supported for Hybrid and X ")
+			return ; 
+		}
+	
 		var url = apigee.to.url;
 		var org = apigee.to.org;
 		var userid = apigee.to.userid;
@@ -155,6 +170,14 @@ module.exports = function(grunt) {
 
 
 	grunt.registerMultiTask('deleteProxyKVM', 'Delete all proxy-kvm from org ' + apigee.to.org + " [" + apigee.to.version + "]", function() {
+	
+		var gatewayType = apigee.to.gatewayType || 0 ; 
+
+		if ( gatewayType === '1') {
+			grunt.log.ok("deleteProxyKVM - is not supported for Hybrid and X ")
+			return ; 
+		}
+
 		var url = apigee.to.url;
 		var org = apigee.to.org;
 		var userid = apigee.to.userid;

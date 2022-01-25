@@ -2,12 +2,13 @@ services:
   import:
     build:
       context: .
-    image: ${REPO:-localhost}/apigee-migrate-tool
+    image: ${REPO:-public.ecr.aws/sidgs}/sidgs-apigee-migrate-tool
     environment:
       - name=value
+      - NODE_TLS_REJECT_UNAUTHORIZED=0
     env_file:
-      - .env
-    command: "sh -x ./all_export_tasks.sh"
+      - app/.env
+    command: "node_modules/.bin/grunt exportDevs -v "
     volumes:
       - ./data:/app/data 
     

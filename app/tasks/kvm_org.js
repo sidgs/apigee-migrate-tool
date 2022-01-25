@@ -5,6 +5,12 @@ var kvms;
 module.exports = function(grunt) {
 	'use strict';
 	grunt.registerTask('exportOrgKVM', 'Export all org-kvm from org ' + apigee.from.org + " [" + apigee.from.version + "]", function() {
+		var gatewayType = apigee.from.gatewayType || 0 ; 
+
+		if ( gatewayType|| 0 === '1') {
+			grunt.log.ok("exportOrgKVM - is not supported for Hybrid and X ")
+			return ; 
+		}
 		var url = apigee.from.url;
 		var org = apigee.from.org;
 		var userid = apigee.from.userid;
@@ -75,6 +81,13 @@ module.exports = function(grunt) {
 
 
 	grunt.registerMultiTask('importOrgKVM', 'Import all org-kvm to org ' + apigee.to.org + " [" + apigee.to.version + "]", function() {
+	
+		var gatewayType = apigee.to.gatewayType || 0 ; 
+
+		if ( gatewayType|| 0 === '1') {
+			grunt.log.ok("importOrgKVM - is not supported for Hybrid and X ")
+			return ; 
+		}
 		var url = apigee.to.url;
 		var org = apigee.to.org;
 		var userid = apigee.to.userid;
@@ -123,6 +136,13 @@ module.exports = function(grunt) {
 
 
 	grunt.registerMultiTask('deleteOrgKVM', 'Delete all org-kvm from org ' + apigee.to.org + " [" + apigee.to.version + "]", function() {
+
+		var gatewayType = apigee.to.gatewayType || 0 ; 
+
+		if ( gatewayType|| 0 === '1') {
+			grunt.log.ok("deleteOrgKVM - is not supported for Hybrid and X ")
+			return ; 
+		}
 		var url = apigee.to.url;
 		var org = apigee.to.org;
 		var userid = apigee.to.userid;

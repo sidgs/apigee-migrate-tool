@@ -10,6 +10,8 @@ module.exports = function(grunt) {
 		var org = apigee.from.org;
 		var userid = apigee.from.userid;
 		var passwd = apigee.from.passwd;
+		var hybrid = apigee.from.gatewayType; 
+
 		var filepath = grunt.config.get("exportDevs.dest.data");
 		var dev_count = 0;
 		var done_count = 0;
@@ -59,6 +61,11 @@ module.exports = function(grunt) {
 			request(url, function (error, response, body) {
 				if (!error && response.statusCode == 200) {
 					var devs = JSON.parse(body);
+
+					if ( hybrid === '1') {
+						devs = devs.developer 
+					}
+
 					var last = null;
 
 					// detect none and we're done
@@ -66,7 +73,13 @@ module.exports = function(grunt) {
 						grunt.log.ok('No developers, done');
 						done();
 					// detect the only developer returned is the one we asked to start with; that's the end game, but wait.
-					} else if ( (devs.length == 1) && (devs[0] == start) ) {
+					var lastEmail ; 
+					if ( apigee.for.gatewayType === '1') {
+						lastEmail = devs[0].email
+					} else {
+						lastEmail = devs[0]
+					}
+					} else if ( (devs.length == 1) && (lastEmail  == start) ) {
 						grunt.log.ok('Retrieved TOTAL of ' + dev_count + ' developers, waiting for callbacks to complete');
 					} else {
 						dev_count += devs.length;
@@ -76,8 +89,14 @@ module.exports = function(grunt) {
 						for (var i = 0; i < devs.length; i++) {
 							// If there was a 'start', don't do it again, because it was processed in the previous callback.
 							if (!start || devs[i] != start) {
-								callback(devs[i]);
-								last = devs[i];
+								if ( hybrid === '1') {
+									callback(devs[i].email);
+									last = devs[i].email;
+
+								} else {
+									callback(devs[i]);
+									last = devs[i];
+								}
 							}
 						}
 
@@ -106,6 +125,8 @@ module.exports = function(grunt) {
 		}, 3000);
 		grunt.verbose.writeln("========================= export Devs DONE ===========================" );
 		*/
+
+		
 	});
 
 

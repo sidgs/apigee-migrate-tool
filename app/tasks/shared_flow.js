@@ -18,9 +18,20 @@ module.exports = function(grunt) {
 		url = url + "/v1/organizations/" + org + "/sharedflows";
         grunt.verbose.writeln("Getting shared flows... " + url);
 
+        var gatewayType = apigee.from.gatewayType || 0 ; 
+
 		request(url, function (error, response, body) {
 			if (!error && response.statusCode == 200) {
 			    shared_flows =  JSON.parse(body);
+
+                if ( gatewayType === '1') {
+                    const sfs= [];
+                    for ( i in shared_flows.sharedFlows) {
+                        sfs[i] = shared_flows.sharedFlows[i].name
+                    }
+                    shared_flows = sfs
+                }
+
 			    if( shared_flows.length == 0 ) {
                     grunt.verbose.writeln ("exportSharedFlows: No Shared flows");
                     grunt.verbose.writeln("================== export Shared Flows DONE()" );
