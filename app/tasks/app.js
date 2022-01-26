@@ -10,6 +10,7 @@ module.exports = function(grunt) {
 		var org = apigee.from.org;
 		var userid = apigee.from.userid;
 		var passwd = apigee.from.passwd;
+		var limit = apigee.from.limit || -1 
 		var filepath = grunt.config.get("exportApps.dest.data");
 		var done_count =0;
 		var dev_count =0;

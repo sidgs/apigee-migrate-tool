@@ -6,8 +6,8 @@ module.exports = {
 		url: process.env.FROM_URL ||  'https://api.enterprise.apigee.com',
 		userid: process.env.FROM_USER || 'admin@google.com',
 		passwd: process.env.FROM_PWD ||'SuperSecret123',
-		org: process.env.FROM_ORG ||'org1',
-		env: process.env.FROM_ENV ||'test',
+		org: process.env.FROM_ORG ||'amer-mint-partner01',
+		env: process.env.FROM_ENV ||'prod',
 		gatewayType: process.env.FROM_GATEWAY_TYPE || 0 // 0 - Edge , 1 - Apigee X / Hybrid 
 	},
 	to: {

@@ -5,6 +5,9 @@
     "type": "git",
     "url": "https://github.com/apigeecs/apigee-migrate-tool.git"
   },
+  "scripts": {
+    "export" : "grunt exportAll -v "
+  },
   "version": "0.1.0",
   "devDependencies": {
     "async": "^2.6.1",

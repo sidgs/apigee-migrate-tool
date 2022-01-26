@@ -79,7 +79,7 @@ module.exports = function(grunt) {
 			} 
 			else
 			{
-				grunt.log.error(error);
+				grunt.log.error(` ${error === null ? 'No Error Message. Printing Body ' : error } -  ${body}`);
 			}
 		}).auth(userid, passwd, true);
 		/*
