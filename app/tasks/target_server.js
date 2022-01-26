@@ -10,7 +10,11 @@ var APIGEE_ENTITY_REQUEST_PATH = '/targetservers';
 module.exports = function(grunt) {
   'use strict';
   grunt.registerTask('export' + ENTITY_COMMAND_NAME, 'Export all ' + APIGEE_ENTITY_PLURAL.toLowerCase() + ' from org ' + apigee.from.org + " [" + apigee.from.version + "]", function() {
-		var org = apigee.from.org;
+    if ( apigee.include.target_server !== true  ) {
+			grunt.log.verbose( `Skipping  target_server`)
+			return ; 
+		}
+    var org = apigee.from.org;
 		var env = apigee.from.env;
 		var url = apigee.from.url;
 		var userid = apigee.from.userid;
@@ -70,6 +74,10 @@ module.exports = function(grunt) {
 
 
   grunt.registerMultiTask('import' + ENTITY_COMMAND_NAME, 'Import all ' + APIGEE_ENTITY_PLURAL.toLowerCase() + ' to org ' + apigee.to.org + " [" + apigee.to.version + "]", function() {
+    if ( apigee.include.target_server !== true  ) {
+			grunt.log.verbose( `Skipping  target_server`)
+			return ; 
+		}
     var url = apigee.to.url;
     var org = apigee.to.org;
 		var env = apigee.to.env;
@@ -121,6 +129,10 @@ module.exports = function(grunt) {
 
 
   grunt.registerMultiTask('delete' + ENTITY_COMMAND_NAME, 'Delete all ' + APIGEE_ENTITY_PLURAL.toLowerCase() + ' from org ' + apigee.to.org + " [" + apigee.to.version + "]", function() {
+    if ( apigee.include.target_server !== true  ) {
+			grunt.log.verbose( `Skipping  target_server`)
+			return ; 
+		}
     var url = apigee.to.url;
     var org = apigee.to.org;
 		var env = apigee.to.env;

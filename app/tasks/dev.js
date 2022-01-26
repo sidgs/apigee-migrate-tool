@@ -6,6 +6,12 @@ var devs;
 module.exports = function(grunt) {
 	'use strict';
 	grunt.registerTask('exportDevs', 'Export all developers from org ' + apigee.from.org + " [" + apigee.from.version + "]", function() {
+		
+		if ( apigee.include.dev !== true  ) {
+			grunt.log.verbose( `Skipping  Devs`)
+			return ; 
+		}
+
 		var url = apigee.from.url;
 		var org = apigee.from.org;
 		var userid = apigee.from.userid;
@@ -131,6 +137,12 @@ module.exports = function(grunt) {
 
 
 	grunt.registerMultiTask('importDevs', 'Import all developers to org ' + apigee.to.org + " [" + apigee.to.version + "]", function() {
+		
+		if ( apigee.include.dev !== true  ) {
+			grunt.log.verbose( `Skipping  Devs`)
+			return ; 
+		}
+
 		var url = apigee.to.url;
 		var org = apigee.to.org;
 		var userid = apigee.to.userid;
@@ -178,6 +190,12 @@ module.exports = function(grunt) {
 	});
 
 	grunt.registerMultiTask('deleteDevs', 'Delete all developers from org ' + apigee.to.org + " [" + apigee.to.version + "]", function() {
+	
+		if ( apigee.include.dev !== true  ) {
+			grunt.log.verbose( `Skipping  Devs`)
+			return ; 
+		}
+		
 		var url = apigee.to.url;
 		var org = apigee.to.org;
 		var userid = apigee.to.userid;

@@ -5,6 +5,12 @@ var proxies;
 module.exports = function(grunt) {
 	'use strict';
 	grunt.registerTask('exportProxies', 'Export all proxies from org ' + apigee.from.org + " [" + apigee.from.version + "]", function() {
+		
+		if ( apigee.include.proxy !== true  ) {
+			grunt.log.verbose( `Skipping  proxy`)
+			return ; 
+		}
+
 		var url = apigee.from.url;
 		var org = apigee.from.org;
 		var userid = apigee.from.userid;
@@ -93,6 +99,10 @@ module.exports = function(grunt) {
 	});
 
 	grunt.registerMultiTask('importProxies', 'Import all proxies to org ' + apigee.to.org + " [" + apigee.to.version + "]", function() {
+		if ( apigee.include.proxy !== true  ) {
+			grunt.log.verbose( `Skipping  proxy`)
+			return ; 
+		}
 		var url = apigee.to.url;
 		var org = apigee.to.org;
 		var userid = apigee.to.userid;
@@ -138,6 +148,10 @@ module.exports = function(grunt) {
 	});
 
 	grunt.registerMultiTask('deleteProxies', 'Delete all proxies from org ' + apigee.to.org + " [" + apigee.to.version + "]", function() {
+		if ( apigee.include.proxy !== true  ) {
+			grunt.log.verbose( `Skipping  proxy`)
+			return ; 
+		}
 		var url = apigee.to.url;
 		var org = apigee.to.org;
 		var userid = apigee.to.userid;

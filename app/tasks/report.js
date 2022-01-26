@@ -5,6 +5,12 @@ var reports;
 module.exports = function(grunt) {
 	'use strict';
 	grunt.registerTask('exportReports', 'Export all reports from org ' + apigee.from.org + " [" + apigee.from.version + "]", function() {
+	
+		if ( apigee.include.report !== true  ) {
+			grunt.log.verbose( `Skipping  report`)
+			return ; 
+		}
+
 		var url = apigee.from.url;
 		var org = apigee.from.org;
 		var userid = apigee.from.userid;
@@ -53,6 +59,13 @@ module.exports = function(grunt) {
 	});
 
 	grunt.registerMultiTask('importReports', 'Import all reports to org ' + apigee.to.org + " [" + apigee.to.version + "]", function() {
+	
+		if ( apigee.include.report !== true  ) {
+			grunt.log.verbose( `Skipping  report`)
+			return ; 
+		}
+
+		
 		var url = apigee.to.url;
 		var org = apigee.to.org;
 		var userid = apigee.to.userid;
@@ -100,6 +113,11 @@ module.exports = function(grunt) {
 	});
 
 	grunt.registerMultiTask('deleteReports', 'Delete all reports from org ' + apigee.to.org + " [" + apigee.to.version + "]", function() {
+		if ( apigee.include.report !== true  ) {
+			grunt.log.verbose( `Skipping  report`)
+			return ; 
+		}
+
 		var url = apigee.to.url;
 		var org = apigee.to.org;
 		var userid = apigee.to.userid;

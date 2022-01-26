@@ -7,6 +7,11 @@ module.exports = function(grunt) {
 	'use strict';
 
 	grunt.registerMultiTask('importKeys', 'Import all app keys to org ' + apigee.to.org + " [" + apigee.to.version + "]", function() {
+		
+		if ( apigee.include.key !== true  ) {
+			grunt.log.verbose( `Skipping  key`)
+			return ; 
+		}
 		var url = apigee.to.url;
 		var org = apigee.to.org;
 		var userid = apigee.to.userid;
@@ -119,6 +124,12 @@ module.exports = function(grunt) {
 	});
 
 	grunt.registerMultiTask('deleteKeys', 'Delete all app keys from org ' + apigee.to.org + " [" + apigee.to.version + "]", function() {
+			
+		if ( apigee.include.key !== true  ) {
+			grunt.log.verbose( `Skipping  key`)
+			return ; 
+		}
+		
 		var url = apigee.to.url;
 		var org = apigee.to.org;
 		var userid = apigee.to.userid;

@@ -6,6 +6,12 @@ var apps;
 module.exports = function(grunt) {
 	'use strict';
 	grunt.registerTask('exportApps', 'Export all apps from org ' + apigee.from.org + " [" + apigee.from.version + "]", function() {
+		
+		if ( apigee.include.app !== true  ) {
+			grunt.log.verbose( `Skipping  Apps`)
+			return ; 
+		}
+
 		var url = apigee.from.url;
 		var org = apigee.from.org;
 		var userid = apigee.from.userid;
@@ -152,7 +158,13 @@ module.exports = function(grunt) {
 	});
 
 	grunt.registerMultiTask('importApps', 'Import all apps to org ' + apigee.to.org + " [" + apigee.to.version + "]", function() {
-	    var url = apigee.to.url;
+	
+		if ( apigee.include.app !== true  ) {
+			grunt.log.verbose( `Skipping  Apps`)
+			return ; 
+		}
+
+		var url = apigee.to.url;
 	    var org = apigee.to.org;
 	    var userid = apigee.to.userid;
 	    var passwd = apigee.to.passwd;
@@ -298,6 +310,12 @@ module.exports = function(grunt) {
 
 
 	grunt.registerMultiTask('deleteApps', 'Delete all apps from org ' + apigee.to.org + " [" + apigee.to.version + "]", function() {
+		
+		if ( apigee.include.app !== true  ) {
+			grunt.log.verbose( `Skipping  Apps`)
+			return ; 
+		}
+
 		var url = apigee.to.url;
 		var org = apigee.to.org;
 		var userid = apigee.to.userid;

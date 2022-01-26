@@ -5,9 +5,19 @@ services:
     image: ${REPO:-public.ecr.aws/sidgs}/sidgs-apigee-migrate-tool
     environment:
       - name=value
-      - NODE_TLS_REJECT_UNAUTHORIZED=0
-    env_file:
-      - app/.env
+      - NODE_TLS_REJECT_UNAUTHORIZED=1
+      - FROM_USER
+      - FROM_PWD
+      - FROM_ORG
+      - FROM_ENV
+      - FROM_GATEWAY_TYPE
+      - FROM_URL
+      - TO_USER
+      - TO_PWD
+      - TO_ORG
+      - TO_ENV
+      - TO_GATEWAY_TYPE
+      - TO_URL
     command: "node_modules/.bin/grunt exportDevs -v "
     volumes:
       - ./data:/app/data 

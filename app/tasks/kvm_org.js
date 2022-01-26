@@ -5,6 +5,10 @@ var kvms;
 module.exports = function(grunt) {
 	'use strict';
 	grunt.registerTask('exportOrgKVM', 'Export all org-kvm from org ' + apigee.from.org + " [" + apigee.from.version + "]", function() {
+		if ( apigee.include.kvm !== true  ) {
+			grunt.log.verbose( `Skipping  kvm`)
+			return ; 
+		}
 		var gatewayType = apigee.from.gatewayType || 0 ; 
 
 		if ( gatewayType|| 0 === '1') {
@@ -82,6 +86,10 @@ module.exports = function(grunt) {
 
 	grunt.registerMultiTask('importOrgKVM', 'Import all org-kvm to org ' + apigee.to.org + " [" + apigee.to.version + "]", function() {
 	
+		if ( apigee.include.kvm !== true  ) {
+			grunt.log.verbose( `Skipping  kvm`)
+			return ; 
+		}
 		var gatewayType = apigee.to.gatewayType || 0 ; 
 
 		if ( gatewayType|| 0 === '1') {
@@ -137,6 +145,10 @@ module.exports = function(grunt) {
 
 	grunt.registerMultiTask('deleteOrgKVM', 'Delete all org-kvm from org ' + apigee.to.org + " [" + apigee.to.version + "]", function() {
 
+		if ( apigee.include.kvm !== true  ) {
+			grunt.log.verbose( `Skipping  kvm`)
+			return ; 
+		}
 		var gatewayType = apigee.to.gatewayType || 0 ; 
 
 		if ( gatewayType|| 0 === '1') {

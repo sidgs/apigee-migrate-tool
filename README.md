@@ -8,38 +8,11 @@ Use this tool to migrate configuration information and entities from one Apigee 
 - All imports and delete tasks work on the “to” configurations in config.js.
 - **Deletes made using these scripts cannot be rolled back. Please use delete commands with caution.**
 
-> The migration tool supports only basic authentication when authenticating with your Apigee orgs. If you're using 2-factor authentication or bearer tokens, you may need to temporarily disable that requirement in order to use the tool.
+> The migration tool supports only basic authentication when authenticating with your Apigee orgs. If you're using 2-factor authentication or bearer tokens, you may need to temporarily disable that requirement in order to use the tool or deploy Management Services Wrapper that will support basic authentication and can handle communicaiton with MS API using Tokens 
 
-License -  [MIT](https://github.com/apigeecs/apigee-migrate-tool/blob/master/LICENSE)
+Ref : https://sidgsclover.atlassian.net/l/c/KrvaQdXx for documentation regarding the tool  
 
-## Data migrated
 
-With the tool, you can import and export data about:
-- developers
-- proxies (latest version)
-- shared flows
-- flow hooks
-- products
-- apps
-- app keys
-- KVMs (org and env)
-- Reports
-- Spec store (Not available on-premises. Spec store APIs are in experimental status, so may change in the future)
-- Target Servers
-
-You can also import the following kinds of data from a CSV file to an Apigee org:
-  - developers
-  - apps
-  - app Keys
-  - KVMs (org and env)
-
-## Data not migrated
-
-**Please note** that the following entities won't be migrated as part of this tool. In most cases, you'll need to migrate these manually using the Apigee Edge console. For more on migrating these, see the Apigee [documentation on org data migration](https://docs.apigee.com/api-services/content/migrating-data-apigee-trial-org).
- - Cache resources and cached values.
- - Environment resources such as virtualhosts, and keystores.
- - KVM entries for "encrypted" key-value maps. Encrypted values can't be retrieved using the management API. Make a note of the values you're using in your old org, then add these values manually to the new org.
- - Organization or environment level resources such as .jar files, .js files, and so on.
 
 ## Installing the tool
 
@@ -50,7 +23,7 @@ You can also import the following kinds of data from a CSV file to an Apigee org
     ```
 1. To get the tool, clone this repository.
     ```
-    git clone https://github.com/apigeecs/apigee-migrate-tool.git
+        git clone https://bitbucket.org/sidgs/apigee-migrate-tool.git
     ```
 1. Install the Node.js dependencies that the tool requires.
     ```

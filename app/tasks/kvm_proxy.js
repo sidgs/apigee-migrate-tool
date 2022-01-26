@@ -7,6 +7,10 @@ module.exports = function(grunt) {
 	'use strict';
 	grunt.registerTask('exportProxyKVM', 'Export all proxy-kvm from org ' + apigee.from.org + " [" + apigee.from.version + "]", function() {
 	
+		if ( apigee.include.kvm !== true  ) {
+			grunt.log.verbose( `Skipping  kvm`)
+			return ; 
+		}
 		var gatewayType = apigee.from.gatewayType || 0 ; 
 
 		if ( gatewayType === '1') {
@@ -92,7 +96,11 @@ module.exports = function(grunt) {
 
 
 	grunt.registerMultiTask('importProxyKVM', 'Import all proxy-kvm to org ' + apigee.to.org + " [" + apigee.to.version + "]", function() {
-	
+
+		if ( apigee.include.kvm !== true  ) {
+			grunt.log.verbose( `Skipping  kvm`)
+			return ; 
+		}
 		var gatewayType = apigee.to.gatewayType || 0 ; 
 
 		if ( gatewayType === '1') {
@@ -171,6 +179,10 @@ module.exports = function(grunt) {
 
 	grunt.registerMultiTask('deleteProxyKVM', 'Delete all proxy-kvm from org ' + apigee.to.org + " [" + apigee.to.version + "]", function() {
 	
+		if ( apigee.include.kvm !== true  ) {
+			grunt.log.verbose( `Skipping  kvm`)
+			return ; 
+		}
 		var gatewayType = apigee.to.gatewayType || 0 ; 
 
 		if ( gatewayType === '1') {

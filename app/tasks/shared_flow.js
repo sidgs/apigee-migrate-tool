@@ -5,7 +5,14 @@ var shared_flows;
 module.exports = function(grunt) {
 	'use strict';
 	grunt.registerTask('exportSharedFlows', 'Export all shared flows from org ' + apigee.from.org + " [" + apigee.from.version + "]", function() {
-		var url = apigee.from.url;
+		
+        if ( apigee.include.shared_flow !== true  ) {
+			grunt.log.verbose( `Skipping  shared_flow`)
+			return ; 
+		}
+
+
+        var url = apigee.from.url;
 		var org = apigee.from.org;
 		var userid = apigee.from.userid;
 		var passwd = apigee.from.passwd;
@@ -102,7 +109,12 @@ module.exports = function(grunt) {
 
     grunt.registerMultiTask('importSharedFlows', 'Import all shared flows to org ' + 
         apigee.to.org + " [" + apigee.to.version + "]", function() {
-        var url = apigee.to.url;
+   
+            if ( apigee.include.shared_flow !== true  ) {
+                grunt.log.verbose( `Skipping  shared_flow`)
+                return ; 
+            }
+            var url = apigee.to.url;
         var org = apigee.to.org;
         var userid = apigee.to.userid;
         var passwd = apigee.to.passwd;
@@ -147,6 +159,10 @@ module.exports = function(grunt) {
     });
 
     grunt.registerMultiTask('deleteSharedFlows', 'Delete all shared flows from org ' + apigee.to.org + " [" + apigee.to.version + "]", function() {
+        if ( apigee.include.shared_flow !== true  ) {
+			grunt.log.verbose( `Skipping  shared_flow`)
+			return ; 
+		}
         var url = apigee.to.url;
         var org = apigee.to.org;
         var userid = apigee.to.userid;
@@ -190,7 +206,11 @@ module.exports = function(grunt) {
 
 
     grunt.registerTask('deploySharedFlows', 'Deploy revision 1 on all shared flows for org ' + apigee.to.org + " [" + apigee.to.version + "]", function() {
-            var url = apigee.to.url;
+        if ( apigee.include.shared_flow !== true  ) {
+			grunt.log.verbose( `Skipping  shared_flow`)
+			return ; 
+		}
+        var url = apigee.to.url;
             var org = apigee.to.org;
             var env = apigee.to.env;
             var userid = apigee.to.userid;
@@ -239,7 +259,12 @@ module.exports = function(grunt) {
     });
 
     grunt.registerTask('undeploySharedFlows', 'UnDeploy revision 1 on all shared flows for org ' + apigee.to.org + " [" + apigee.to.version + "]", function() {
-            var url = apigee.to.url;
+      
+        if ( apigee.include.shared_flow !== true  ) {
+			grunt.log.verbose( `Skipping  shared_flow`)
+			return ; 
+		}
+          var url = apigee.to.url;
             var org = apigee.to.org;
             var env = apigee.to.env;
             var userid = apigee.to.userid;

@@ -11,6 +11,10 @@ module.exports = function (grunt) {
      */
     grunt.registerTask('exportAllSpecs', 'Export all Specs from org ' + apigee.from.org + " [" + apigee.from.version + "]", function () {
 
+        if ( apigee.include.spec !== true  ) {
+			grunt.log.verbose( `Skipping  spec`)
+			return ; 
+		}
         if (apigee.from.url !== 'https://api.enterprise.apigee.com') {
             throw new Error("This will only works with Apigee Edge (Cloud)");
         }
@@ -31,6 +35,10 @@ module.exports = function (grunt) {
      *
      */
     grunt.registerTask('importAllSpecs', 'Import all Specs to ' + apigee.to.org + " [" + apigee.to.version + "]", function () {
+        if ( apigee.include.spec !== true  ) {
+			grunt.log.verbose( `Skipping  spec`)
+			return ; 
+		}
         if (apigee.to.url !== 'https://api.enterprise.apigee.com') {
             throw new Error("This will only works with Apigee Edge (Cloud)");
         }
@@ -48,6 +56,10 @@ module.exports = function (grunt) {
      *
      */
     grunt.registerTask('deleteAllSpecs', 'Delete all Specs from ' + apigee.to.org + " [" + apigee.to.version + "]", function () {
+        if ( apigee.include.spec !== true  ) {
+			grunt.log.verbose( `Skipping  spec`)
+			return ; 
+		}
         if (apigee.to.url !== 'https://api.enterprise.apigee.com') {
             throw new Error("This will only works with Apigee Edge (Cloud)");
         }

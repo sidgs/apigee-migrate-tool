@@ -5,6 +5,10 @@ var products;
 module.exports = function(grunt) {
 	'use strict';
 	grunt.registerTask('exportProducts', 'Export all products from org ' + apigee.from.org + " [" + apigee.from.version + "]", function() {
+		if ( apigee.include.product !== true  ) {
+			grunt.log.verbose( `Skipping  product`)
+			return ; 
+		}
 		var url = apigee.from.url;
 		var org = apigee.from.org;
 		var userid = apigee.from.userid;
@@ -95,6 +99,11 @@ module.exports = function(grunt) {
 	});
 
 	grunt.registerMultiTask('importProducts', 'Import all products to org ' + apigee.to.org + " [" + apigee.to.version + "]", function() {
+
+		if ( apigee.include.product !== true  ) {
+			grunt.log.verbose( `Skipping  product`)
+			return ; 
+		}
 		var url = apigee.to.url;
 		var org = apigee.to.org;
 		var userid = apigee.to.userid;
@@ -139,6 +148,12 @@ module.exports = function(grunt) {
 	});
 
 	grunt.registerMultiTask('deleteProducts', 'Delete all products from org ' + apigee.to.org + " [" + apigee.to.version + "]", function() {
+
+		if ( apigee.include.product !== true  ) {
+			grunt.log.verbose( `Skipping  product`)
+			return ; 
+		}
+		
 		var url = apigee.to.url;
 		var org = apigee.to.org;
 		var userid = apigee.to.userid;

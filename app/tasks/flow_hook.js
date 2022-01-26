@@ -7,6 +7,11 @@ var configured_flow_hooks;
 module.exports = function(grunt) {
 	'use strict';
 	grunt.registerTask('exportFlowHooks', 'Export all configured flow hooks from org ' + apigee.from.org + " [" + apigee.from.version + "]", function() {
+	
+		if ( apigee.include.flow_hook !== true  ) {
+			grunt.log.verbose( `Skipping  flow_hook`)
+			return ; 
+		}
 		var base_url = apigee.from.url;
 		var org = apigee.from.org;
 		var env = apigee.from.env;
@@ -58,8 +63,13 @@ module.exports = function(grunt) {
 	});
 
 	grunt.registerMultiTask('importFlowHooks', 'Import all configured flow hooks to org ' +
-		apigee.to.org + " [" + apigee.to.version + "]",
+	apigee.to.org + " [" + apigee.to.version + "]",
 		function() {
+
+			if ( apigee.include.flow_hook !== true  ) {
+				grunt.log.verbose( `Skipping  flow_hook`)
+				return ; 
+			}
 			var url = apigee.to.url;
 			var org = apigee.to.org;
 			var env = apigee.to.env;
@@ -122,6 +132,11 @@ module.exports = function(grunt) {
 		});
 
 	grunt.registerTask('deleteFlowHooks', 'Detach any configured flow hooks from org ' + apigee.to.org + " [" + apigee.to.version + "]", function() {
+	
+		if ( apigee.include.flow_hook !== true  ) {
+			grunt.log.verbose( `Skipping  flow_hook`)
+			return ; 
+		}
 		var url = apigee.to.url;
 		var org = apigee.to.org;
 		var env = apigee.to.env;
