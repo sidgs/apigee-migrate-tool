@@ -6,7 +6,7 @@
     "url": "https://github.com/apigeecs/apigee-migrate-tool.git"
   },
   "scripts": {
-    "export" : "grunt exportAll -v "
+    "export": "grunt exportAll -v "
   },
   "version": "0.1.0",
   "devDependencies": {
@@ -22,6 +22,7 @@
     "time-grunt": "^1.0.0"
   },
   "dependencies": {
-    "dotenv": "^14.2.0"
+    "dotenv": "^14.2.0",
+    "sync-request": "^6.1.0"
   }
 }

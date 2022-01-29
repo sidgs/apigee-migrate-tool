@@ -2,6 +2,8 @@
 var request = require('request');
 var apigee = require('../config.js');
 var products;
+var utils= require ('../util/apigeeUtils');
+
 module.exports = function(grunt) {
 	'use strict';
 	grunt.registerTask('exportProducts', 'Export all products from org ' + apigee.from.org + " [" + apigee.from.version + "]", function() {
@@ -122,6 +124,8 @@ module.exports = function(grunt) {
 
 		files.forEach(function(filepath) {
 			var content = grunt.file.read(filepath);
+			content = utils.clearUnwantedElements(content);
+
 			//grunt.verbose.writeln(content);	
 			request.post({
 			  headers: {'content-type' : 'application/json'},

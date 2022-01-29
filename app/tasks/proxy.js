@@ -128,7 +128,9 @@ module.exports = function(grunt) {
 			var filename = filepath.replace(/^.*[\\\/]/, '');
 			var name = filename.slice(0, -4);
 			//console.log(name);
-			var req = request.post(url+name, function (err, resp, body) {
+			grunt.log.ok("Add - " + url+name ) 
+			var req = request.post(url+name, 
+				function (err, resp, body) {
 			  if (err) {
 			    grunt.log.error(err);
 			  } else {
@@ -178,7 +180,7 @@ module.exports = function(grunt) {
 			var proxy_file = folders[folders.length - 1];
 			var proxy = proxy_file.split(".")[0];
 			var app_del_url = url + proxy;
-			grunt.verbose.writeln(app_del_url);
+			grunt.log.ok("Delete -  "+ app_del_url);
 			request.del(app_del_url,function(error, response, body){
 			  grunt.verbose.writeln('Resp [' + response.statusCode + '] for proxy deletion ' + this.app_del_url + ' -> ' + body);
 			  if (error || response.statusCode!=200)
@@ -230,6 +232,8 @@ module.exports = function(grunt) {
 							}
 						}).auth(userid, passwd, true);
 				    	// End proxy deploy
+						// const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
+						// await delay(1000) //wait for a second 
 				    }; 
 				    
 				} 

@@ -3,6 +3,8 @@ var request = require('request');
 var apigee = require('../config.js');
 var async = require('async');
 var devs;
+var utils = require('../util/apigeeUtils'); 
+
 module.exports = function(grunt) {
 	'use strict';
 	grunt.registerTask('exportDevs', 'Export all developers from org ' + apigee.from.org + " [" + apigee.from.version + "]", function() {
@@ -73,18 +75,18 @@ module.exports = function(grunt) {
 					}
 
 					var last = null;
+					var lastEmail ; 
+						if ( apigee.for.gatewayType === '1') {
+							lastEmail = devs[0].email
+						} else {
+							lastEmail = devs[0]
+						}
 
 					// detect none and we're done
 					if ( devs.length == 0 ) {
 						grunt.log.ok('No developers, done');
 						done();
 					// detect the only developer returned is the one we asked to start with; that's the end game, but wait.
-					var lastEmail ; 
-					if ( apigee.for.gatewayType === '1') {
-						lastEmail = devs[0].email
-					} else {
-						lastEmail = devs[0]
-					}
 					} else if ( (devs.length == 1) && (lastEmail  == start) ) {
 						grunt.log.ok('Retrieved TOTAL of ' + dev_count + ' developers, waiting for callbacks to complete');
 					} else {
@@ -165,7 +167,10 @@ module.exports = function(grunt) {
 		files.forEach(function(filepath) {
 			console.log(filepath);
 			var content = grunt.file.read(filepath);
-			grunt.verbose.writeln(url);	
+			content = utils.clearUnwantedElements(content);
+			
+			grunt.verbose.writeln(url +  " -> Content : " + content);	
+
 			request.post({
 			  headers: {'Content-Type' : 'application/json'},
 			  url:     url,
@@ -174,9 +179,11 @@ module.exports = function(grunt) {
 			var status = 999;
 			if (response)	
 			 status = response.statusCode;
-			grunt.verbose.writeln('Resp [' + status + '] for dev creation ' + this.url + ' -> ' + body);
-			if (error || status!=201)
-			  	grunt.verbose.error('ERROR Resp [' + status + '] for dev creation ' + this.url + ' -> ' + body); 
+			grunt.verbose.writeln('Resp [' + status + '] for dev creation ' + this.url );
+			if (error || status!=201) {
+			  	grunt.log.error('ERROR Resp [' + status + '] for dev creation ' + this.url + ' -> body : ' + body + '  -> Content :  ' +  content ); 
+
+			}
 			done_count++;
 			if (done_count == files.length)
 			{
@@ -213,6 +220,9 @@ module.exports = function(grunt) {
 		var done = this.async();
 		files.forEach(function(filepath) {
 			var content = grunt.file.read(filepath);
+			
+			content = utils.clearUnwantedElements(content);
+
 			var dev = JSON.parse(content);
 			var del_url = url + dev.email;
 			grunt.verbose.writeln(del_url);	

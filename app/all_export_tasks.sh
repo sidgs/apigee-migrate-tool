@@ -9,4 +9,4 @@ node_modules/.bin/grunt exportEnvKVM -v
 node_modules/.bin/grunt exportOrgKVM -v
 node_modules/.bin/grunt exportFlowHooks -v
 node_modules/.bin/grunt exportTargetServers -v
-# node_modules/.bin/grunt exportReports -v
+node_modules/.bin/grunt exportReports -v

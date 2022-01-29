@@ -1,0 +1,24 @@
+services:
+  migrate:
+    image: public.ecr.aws/sidgs/sidgs-apigee-migrate-tool
+    environment:
+      - NODE_TLS_REJECT_UNAUTHORIZED=0 # used to supress SSL Validation for Self Signed Certs
+      - FROM_USER=ajayn@sidgs.com
+      - FROM_PWD=Clover123+
+      - FROM_ORG=amer-mint-partner01
+      - FROM_ENV=prod
+      # - FROM_GATEWAY_TYPE=0
+      # - FROM_URL=CHANGE_ME_WITH_REAL_VALVE
+      - TO_USER=oUxAxelVR3pL5prAMGvF9kT3TXunyH08yGRv5u7J6N7LptXY
+      - TO_PWD=0dqM7QDTgrsYWsa6pDG5JTuNjCW2NcNMh2VJemhUux7HYYXZTTNLQTxfdDG1luKO
+      - TO_ORG=sidgs-hybrid-migration-poc
+      - TO_ENV=eval
+      - TO_GATEWAY_TYPE=1
+      - TO_URL=https://sidgs-eval.sidglobal.io/sam-mgmtsvc-wrapper/
+      # - VERBOSE= --verbose
+    command: "sh -x ./all_tasks.sh"
+    # command: "sh -x ./all_delete_tasks.sh"
+    # command: "sh -x ./all_import_tasks.sh"
+    # command: "./node_modules/.bin/grunt importDevs "
+    volumes:
+      - ./data:/app/data 

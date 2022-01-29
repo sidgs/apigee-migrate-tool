@@ -3,6 +3,7 @@ var request = require('request');
 var apigee = require('../config.js');
 var async = require('async');
 var apps;
+var utils = require('../util/apigeeUtils');
 module.exports = function(grunt) {
 	'use strict';
 	grunt.registerTask('exportApps', 'Export all apps from org ' + apigee.from.org + " [" + apigee.from.version + "]", function() {
@@ -189,6 +190,8 @@ module.exports = function(grunt) {
 	        var folders = filepath.split("/");
 	        var dev = folders[folders.length - 2];
 	        var content = grunt.file.read(filepath);
+			content = utils.clearUnwantedElements(content);
+
 	        var app = JSON.parse(content);
 	        grunt.verbose.writeln("Creating app : " + app.name + " under developer " + dev);
 

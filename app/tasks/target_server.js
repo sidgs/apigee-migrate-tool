@@ -6,6 +6,7 @@ var APIGEE_ENTITY_SINGULAR = 'Target Server';
 var APIGEE_ENTITY_PLURAL = 'Target Servers';
 var ENTITY_COMMAND_NAME = 'TargetServers'; //used to create exportTargetServers, importTargetServers, deleteTargetServers
 var APIGEE_ENTITY_REQUEST_PATH = '/targetservers';
+var utils = require('../util/apigeeUtils');
 
 module.exports = function(grunt) {
   'use strict';
@@ -100,6 +101,8 @@ module.exports = function(grunt) {
     files.forEach(function(filepath) {
       console.log(filepath);
       var content = grunt.file.read(filepath);
+      content = utils.clearUnwantedElements(content);
+
       grunt.verbose.writeln(url);
       request.post({
         headers: {
