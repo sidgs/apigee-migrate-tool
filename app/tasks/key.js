@@ -43,7 +43,13 @@ module.exports = function(grunt) {
 				var cKey = credentials[i].consumerKey;
 				var cSecret = credentials[i].consumerSecret;
 				var products = credentials[i].apiProducts;
-				var key_payload = "<CredentialRequest><ConsumerKey>" + cKey + "</ConsumerKey><ConsumerSecret>" + cSecret + "</ConsumerSecret><Attributes></Attributes></CredentialRequest>";
+
+				var key_payload={}
+				key_payload.consumerKey = cKey
+				key_payload.consumerSecret = cSecret
+				
+				key_payload = JSON.stringify(key_payload)
+											
 				grunt.verbose.writeln(key_payload);
 				var products_payload = {};
 
@@ -58,7 +64,7 @@ module.exports = function(grunt) {
 				    function(callback){
 				    	
 						request.post({
-						  headers: {'Content-Type' : 'application/xml'},
+						  headers: {'Content-Type' : 'application/json'},
 						  url:     create_key_url + "create",
 						  body:    key_payload
 						}, function(error, response, body){
