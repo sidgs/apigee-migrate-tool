@@ -76,7 +76,7 @@ module.exports = function(grunt) {
 
 					var last = null;
 					var lastEmail ; 
-						if ( apigee.for.gatewayType === '1') {
+						if ( apigee.from.gatewayType === '1') {
 							lastEmail = devs[0].email
 						} else {
 							lastEmail = devs[0]
