@@ -30,3 +30,7 @@ node_modules
 # Exported configuration, if any
 data
 package-lock.json
+target
+bin
+build
+.gradle
