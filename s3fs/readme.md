@@ -1,0 +1,1 @@
+Ref https://blog.meain.io/2020/mounting-s3-bucket-kube/

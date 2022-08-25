@@ -1,0 +1,14 @@
+services:
+  import:
+    build:
+      context: .
+    image: ${REPO:-public.ecr.aws/sidgs}/sidgs-apigee-migrate-sidgs-aws-s3-mount
+    environment:
+      - S3_REGION=us-east-1
+      - S3_BUCKET=1
+      - AWS_KEY=
+      - AWS_SECRET_KEY=
+    volumes:
+      - ./data:/app/data 
+    
+
